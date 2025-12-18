@@ -6,10 +6,9 @@ class CoffeeMachine:
         self.cups = 9
         self.money = 550
 
-        # states: "main", "buy", "fill_water", "fill_milk", "fill_beans", "fill_cups"
+
         self.state = "main"
 
-        # recipes: water, milk, beans, price
         self.recipes = {
             "1": (250, 0, 16, 4),    # espresso
             "2": (350, 75, 20, 7),   # latte
@@ -66,7 +65,6 @@ class CoffeeMachine:
     def process(self, command: str) -> bool:
         command = command.strip()
 
-        # --- MAIN STATE ---
         if self.state == "main":
             if command == "exit":
                 return False
@@ -81,7 +79,6 @@ class CoffeeMachine:
                 self.state = "fill_water"
             return True
 
-        # --- BUY STATE ---
         if self.state == "buy":
             if command == "back":
                 self.state = "main"
@@ -91,7 +88,6 @@ class CoffeeMachine:
             self.state = "main"
             return True
 
-        # --- FILL STATES ---
         if self.state == "fill_water":
             self.water += int(command)
             self.state = "fill_milk"
